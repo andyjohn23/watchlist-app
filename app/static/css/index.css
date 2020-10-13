@@ -1,3 +1,9 @@
-.row h3{
-    font-size: 500px;
+.movie-card{
+    display: inline-block;
+    list-style: none;
+}
+.movie-card img{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
 }
