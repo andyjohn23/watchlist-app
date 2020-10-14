@@ -1,0 +1,19 @@
+body{
+    background-color: #1d1d1d;
+}
+.movie-card img{
+    width: 280px;
+    height: 250px;
+    object-fit: cover;
+    margin: 10px;
+}
+.movie-card img:hover{
+    transform: scale(1.06);
+}
+ul{
+    margin-right: 7%;
+}
+h3{
+    color: white;
+    font-size: 20px;
+}
