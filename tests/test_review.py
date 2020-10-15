@@ -11,7 +11,14 @@ class MovieTest(unittest.TestCase):
         """
         Set up method that will run before every Test
         """
-        self.new_review = Review(1234, "Python Must Be Crazy", "A thrilling new Python Series","https://image.tmdb.org/t/p/w500/khsjha27hbs", "nice movie")
+        self.new_review = Review(1234, "A thrilling new Python Series","https://image.tmdb.org/t/p/w500/khsjha27hbs", "nice movie")
 
     def test_instance(self):
         self.assertTrue(isinstance(self.new_review, Review))
+
+    def test_save_review(self):
+        """
+        Set up method that will run before every Test
+        """
+        self.new_review = Review.all_reviews.append(self)
+
