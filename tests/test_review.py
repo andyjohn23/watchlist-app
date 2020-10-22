@@ -1,5 +1,6 @@
 import unittest
-from app.models import Review
+from app.models import Review,User
+from app import db
 
 
 class MovieTest(unittest.TestCase):
@@ -8,17 +9,27 @@ class MovieTest(unittest.TestCase):
     """
 
     def setUp(self):
-        """
-        Set up method that will run before every Test
-        """
-        self.new_review = Review(1234, "A thrilling new Python Series","https://image.tmdb.org/t/p/w500/khsjha27hbs", "nice movie")
-
-    def test_instance(self):
-        self.assertTrue(isinstance(self.new_review, Review))
+        self.user_peter = User(username = 'peter',password = 'potato', email = 'peter6@gmail.com')
+        self.new_review = Review(movie_id=12345,movie_title='Review for movies',image_path="https://image.tmdb.org/t/p/w500/jdjdjdjn",movie_review='This movie is the best thing since sliced bread',user = self.user_peter )
+    
+    def test_check_instance_variables(self):
+        self.assertEquals(self.new_review.movie_id,12345)
+        self.assertEquals(self.new_review.movie_title,'Review for movies')
+        self.assertEquals(self.new_review.image_path,"https://image.tmdb.org/t/p/w500/jdjdjdjn")
+        self.assertEquals(self.new_review.movie_review,'This movie is the best thing since sliced bread')
+        self.assertEquals(self.new_review.user,self.user_peter)
 
     def test_save_review(self):
-        """
-        Set up method that will run before every Test
-        """
-        self.new_review = Review.all_reviews.append(self)
+        self.new_review.save_review()
+        self.assertTrue(len(Review.query.all())>0)
+    
+    def test_get_review_by_id(self):
+
+        self.new_review.save_review()
+        got_reviews = Review.get_reviews(12345)
+        self.assertTrue(len(got_reviews) == 1)
+
+    def tearDown(self):
+        Review.query.delete()
+        User.query.delete()
 

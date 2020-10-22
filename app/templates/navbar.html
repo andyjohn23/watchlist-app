@@ -11,16 +11,22 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+                {% if current_user.is_authenticated %}
                 <li><a href="/">Home</a></li>
                 <li><a href="/">Series</a></li>
                 <li><a href="/">Movies</a></li>
                 <li><a href="/">Sports</a></li>
                 <li><a href="/">My List</a></li>
+                <li><a href="{{url_for('main.profile',uname=current_user.username)}}">Profile</a></li>
+                <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
             </ul>
             <form action="/" class="form-inline my-2 my-lg-0" style="margin-top: 1%; float: right; margin-right: 10%;">
-                <input class="form-control mr-sm-2"  name="movie_query" placeholder="Search for a Movie" type="search">
+                <input class="form-control mr-sm-2" name="movie_query" placeholder="Search for a Movie" type="search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              </form>
+            </form>
+            {% else %}
+            <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
+            {%endif%}
         </div>
 
     </div>
